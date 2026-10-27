@@ -307,6 +307,9 @@ styles.css       dark panel, preview stage, grid list
 storage.js       GridStore: localStorage v2, wiping the inherited keys, memory fallback
 colorspaces.js   the 6 blending spaces, the hue unwrapping, the control point lattice, the interpolation ramp
 app.js           frame (format, density, resolution), colors, interpolation, canvas rendering, PNG export
+README.md        the presentation, the one a reader opens first
+intro.jpg        the image of that presentation
+LICENSE          MIT, © 2026 pmousse
 .t/              test harness (jsdom + Python reference), a development tool only
 ```
 
@@ -378,3 +381,17 @@ app.js           frame (format, density, resolution), colors, interpolation, can
   whatever the sampling.
 - Carried out by `.t/ui.mjs` (the interface, 220 checks) and `.t/spaces.cjs` (the color math, 123
   checks), plus `.t/ref.py` for the parity with an independent Python implementation.
+
+## Credits and licence
+
+**This project's code was written by an AI coding agent.** Qwen 3.8 flash (model build
+`qwen3.8-flash-next`) working in the [pi](https://github.com/badlogic/pi-mono) coding-agent harness,
+at the direction of **pmousse**, who chose the direction, supplied the reference images, judged every
+result and owns the project. Some of the reasoning here was the agent's, some of it was the human's:
+the agent proposed the unwrapping of the hues, the lattice of control points, the reverse mapping
+between a ring and a sampling position; the human rejected the visible rupture lines, asked for the
+plain-image preview, refused the spacing parameter, and decided what was worth keeping. The checks
+carried out above are what settled the arguments between the two.
+
+Everything in this repository — the code, this documentation, the introduction image — is under the
+**MIT licence**, © 2026 pmousse. See `LICENSE`.

@@ -64,6 +64,7 @@ sits in [DETAILS.md](DETAILS.md).
 | `storage.js` | saved grids in localStorage |
 | `styles.css` | everything |
 | `DETAILS.md` | the long documentation |
+| `LICENSE` | MIT, © 2026 pmousse |
 | `.t/` | dev tooling: 220 interface checks, 123 color math checks, a Python reference |
 
 Vanilla HTML, CSS and JavaScript. Works straight from the files (`file://`), no server needed.
@@ -92,3 +93,9 @@ at the direction of **pmousse**, who chose the direction, supplied the reference
 result and owns the project. Worth stating plainly: some of the reasoning here was the agent's, some
 of it was the human's, and the division is not neat — the 343 checks under `.t/` are what settled the
 arguments.
+
+## Licence
+
+Everything here — the code, the documentation, the introduction image — is under the **MIT licence**,
+© 2026 pmousse: use it, change it, sell prints made from it, keep the copyright notice and this
+explanation of where the code came from. See [LICENSE](LICENSE).
