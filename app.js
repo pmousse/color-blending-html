@@ -2,15 +2,14 @@
 
 /* ==========================================================================
    app.js — Color Grid (web version)
-   The logic of the Blender add-on `color_grid`: 4 corner colors + bilinear
-   interpolation. The image frame comes from the Truchet Studio project: a format
-   (square, 16:9, phone...), a cell density and a PNG export resolution. The
-   preview is drawn on a canvas, on the very lattice the exported image uses.
+   4 corner colors + bilinear interpolation. The image frame: a format (square,
+   16:9, phone...), a cell density and a PNG export resolution. The preview is
+   drawn on a canvas, on the very lattice the exported image uses.
    ========================================================================== */
 
 const MAX_NAME = 60;
 
-/* Formats taken over from Truchet Studio (ratios reduced, always positive). */
+/* Formats (ratios reduced, always positive). */
 const FORMATS = {
   "1:1": [1, 1, "square 1:1 — social media"],
   "16:9": [16, 9, "desktop 16:9"],
@@ -118,11 +117,11 @@ const rgbToHex = (rgb) =>
     return (Number.isFinite(n) ? Math.round(clamp01(n) * 255) : 0).toString(16).padStart(2, "0");
   }).join("");
 
-/* Stored colors (same shape as the add-on JSON files) are handled directly as
-   sRGB 0..1: see the README, the note on Blender linear values. */
+/* Stored colors are handled directly as sRGB 0..1: see DETAILS.md, the note on the
+   linear values a 3D tool exports. */
 const arrayToHex = (a) => rgbToHex([num01(a[0]), num01(a[1]), num01(a[2])]);
 
-/* Bilinear interpolation, exactly as the add-on:
+/* Bilinear interpolation:
    c = (1-y)((1-x)BL + x BR) + y((1-x)TL + x TR)
    The blend runs in the chosen space (ColorSpaces), sRGB by default. */
 const CS = ColorSpaces;
@@ -189,7 +188,7 @@ function currentRamp() {
 }
 
 /* x = col/(cols-1), y = 1 - row/(rows-1), rows counted from the top.
-   cols == 1 or rows == 1 => x or y stays 0, as in the add-on. */
+   cols == 1 or rows == 1 => x or y stays 0. */
 function cellColor(col, row, cols, rows) {
   const x = cols > 1 ? col / (cols - 1) : 0;
   const y = rows > 1 ? 1 - row / (rows - 1) : 0;
@@ -1402,8 +1401,7 @@ function configDims(config) {
   return configShape(config).dims;
 }
 
-/* Applies a configuration read from storage, correcting values out of bounds,
-   the way the add-on does when reading. */
+/* Applies a configuration read from storage, correcting values out of bounds. */
 function applyConfig(config) {
   const shape = configShape(config);
 

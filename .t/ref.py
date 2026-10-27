@@ -1,4 +1,4 @@
-"""Python reference for the bilinear pass (the Blender add-on formula).
+"""Python reference for the bilinear pass.
 
 Run from the project root, after .t/ui.mjs has written .t/matrix.json:
     python .t/ref.py

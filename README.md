@@ -55,7 +55,7 @@ x = col / (cols - 1)          y = 1 - row / (rows - 1)
 c = (1-y) · [(1-x) · BL + x · BR]  +  y · [(1-x) · TL + x · TR]
 ```
 
-The same formula as the Blender add-on, verified cell by cell against a Python reference. With
+The plain bilinear pass, checked cell by cell against an independent Python implementation. With
 control points, the frame becomes a lattice and each patch is blended with this same pass — with no
 point at all, the result is exactly the plain grid.
 [Full documentation → DETAILS.md](DETAILS.md)
@@ -80,12 +80,12 @@ Vanilla HTML, CSS and JavaScript. Works straight from the files (`file://`), no 
 cd .t && npm install     # jsdom, once
 node .t/ui.mjs           # the interface  → 220 passed, 0 failed
 node .t/spaces.cjs       # the color math → 123 passed, 0 failed
-python .t/ref.py         # parity with the add-on formula → identical
+python .t/ref.py         # parity with an independent Python implementation → identical
 ```
 
 ## Notes assumed
 
-- Grids made with the Blender add-on export colors **linear**; the web page works in sRGB. Old
-  grids are not translated, they start fresh.
+- Colors coming out of a 3D tool are usually stored as **linear** light, while the page works in
+  sRGB. Grids made elsewhere are not translated, they start fresh.
 - Corner colors and copied codes stay plain sRGB HEX whatever the blending space.
 - Control point rings are drawn on the preview only, never in the exported PNG.

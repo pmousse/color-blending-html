@@ -3,10 +3,9 @@
 The long version of [README.md](README.md): every setting spelled out, the color math, the address
 format, the storage keys, the checks carried out.
 
-Color Grid is the browser version of the Blender add-on `color_grid`: you set **4 colors at the
-corners**, and the image fills up by **bilinear interpolation**. The frame of the image comes from the
-Truchet Studio model: a **format**, a cell **density**, an export **resolution**. Nothing else — no
-spacing, no moving, rotating, mirroring or lifting.
+You set **4 colors at the corners**, and the image fills up by **bilinear interpolation**. The frame
+of the image follows one simple model: a **format**, a cell **density**, an export **resolution**.
+Nothing else — no spacing, no moving, rotating, mirroring or lifting.
 
 ## Opening it
 
@@ -124,7 +123,7 @@ PNG with a font fitted to the cell size; unticked, the PNG is a plain plate of c
 
 ## Grid address
 
-As in Truchet Studio, the settings live in the address, in its fragment:
+The settings live in the address, in its fragment:
 
 ```
 index.html#F=16x9&fw=16&fh=9&n=13&rs=2048&sp=oklch&nm=Link%20Test&hx=1&ex=1
@@ -149,9 +148,8 @@ index.html#F=16x9&fw=16&fh=9&n=13&rs=2048&sp=oklch&nm=Link%20Test&hx=1&ex=1
 - **Written at every setting change, read again on opening**: a link shared, pasted into another
   browser or bookmarked reopens the grid as it was, with its file name. The panel shows the
   address under the **Copy link** button.
-- **The fragment rather than the query** (`?F=16`), for the same reasons as in Truchet: it
-  triggers no reload, and it works in `file://`. The query `?F=4x3` stays accepted when reading,
-  for an address pasted written that way.
+- **The fragment rather than the query** (`?F=16`): it triggers no reload, and it works in
+  `file://`. The query `?F=4x3` stays accepted when reading, for an address pasted written that way.
 - **Opening order**: address received, otherwise last grid shown, otherwise default values. A
   shared address therefore comes before what the browser had kept.
 - **A missing key keeps its default value** (`#n=9` only changes the density); a nonsensical key
@@ -177,11 +175,10 @@ For the cell `(col, row)`, rows counted from the top:
 
 $$c_{col,row}=(1-y)\left[(1-x)c_{BL}+x\,c_{BR}\right]+y\left[(1-x)c_{TL}+x\,c_{TR}\right]$$
 
-with $x=\frac{col}{cols-1}$ and $y=1-\frac{row}{rows-1}$. A formula identical to the add-on's
-(parity checked cell by cell against a reference Python implementation). `cols` and `rows` come
-from the format and the density: `16:9` at density 5 gives `cols = 9`, `rows = 5`. With
-`cols == 1` or `rows == 1`, `x` or `y` is 0, as in the add-on — a grid at density 1 therefore
-takes the color of the **bottom left** corner.
+with $x=\frac{col}{cols-1}$ and $y=1-\frac{row}{rows-1}$ (parity checked cell by cell against an
+independent Python implementation). `cols` and `rows` come from the format and the density: `16:9` at
+density 5 gives `cols = 9`, `rows = 5`. With `cols == 1` or `rows == 1`, `x` or `y` is 0 — a grid at
+density 1 therefore takes the color of the **bottom left** corner.
 
 ## Blending space
 
@@ -242,23 +239,23 @@ gap — tiny in linear light — becomes visible near black (`#FF0000` would bec
 
 ## A note on color (color space)
 
-A triplet `[r, g, b]` only makes sense with the rules linking that number to the perceived hue:
-that is the **color space**. Blender stores color properties as **linear light**, the browser
-expects **sRGB** (a gamma-coded value, like the screen). The two do not match: a medium sRGB gray
-`0.5` corresponds to `0.214` in linear.
+A triplet `[r, g, b]` only makes sense with the rules linking that number to the perceived hue: that
+is the **color space**. A 3D tool stores color properties as **linear light**, the browser expects
+**sRGB** (a gamma-coded value, like the screen). The two do not match: a medium sRGB gray `0.5`
+corresponds to `0.214` in linear.
 
 The triplets stored by this page are sRGB, an exact round trip: the code shown, the code copied,
 the triplet written into the storage and the pixel of the PNG are the same value — whatever the
 blending space chosen, which only changes the intermediate cells. That is what led to **starting
-over from scratch** rather than taking back the grids stored by the previous version: they carried
-`cols × rows`, and their floats took the Blender JSONs directly, mixed in sRGB with no conversion
-from linear light. The old values were therefore darker and more saturated than in the Blender
+over from scratch** rather than taking back the grids stored by the previous version of this page:
+they carried `cols × rows`, and their floats came straight out of 3D exports, mixed in sRGB with no
+conversion from linear light. The old values were therefore darker and more saturated than in the 3D
 viewport — and readable no longer with the current model anyway.
 
 ## Persistence: localStorage
 
-Instead of the `grids/*.json` files of the add-on, the grids live in the browser `localStorage`
-(keys prefixed `color_grid.`, to leave room for other applications on the same origin):
+The grids live in the browser `localStorage` — no files to carry around — (keys prefixed
+`color_grid.`, to leave room for other applications on the same origin):
 
 | Key | Content |
 |---|---|
@@ -313,18 +310,18 @@ app.js           frame (format, density, resolution), colors, interpolation, can
 .t/              test harness (jsdom + Python reference), a development tool only
 ```
 
-## Differences assumed with the Blender add-on
+## Limits assumed
 
-| Blender add-on | Web version |
+| One may expect | Here |
 |---|---|
-| 3D mesh, color per corner, emission material | one flat image, cells painted on a canvas |
+| a 3D mesh, one color per corner, an emission material | one flat image, cells painted on a canvas |
 | free `cols` × `rows`, `spacing` between tiles | format + density + resolution, joined cells with no spacing |
-| `tiles` collection, several grids in the scene | one grid shown at a time |
+| several grids coexisting in one scene | one grid shown at a time, the saved ones listed |
 | move / mirror / rotate / lift / delete a tile | absent |
-| JSON files in a folder of the add-on | localStorage, with a PNG export instead of a 3D render |
-| color per face corner (`CORNER`), cell painted with one flat color | a cell of a single color, corners editable |
-| one single color space (Blender floats) | six blending spaces to choose from, per grid |
-| settings in the add-on properties | settings also in the address: a link shares the grid |
+| grid files in a folder | localStorage, and a PNG export instead of a render |
+| color interpolated per face corner, the face painted by the engine | a cell of a single flat color, the 4 corners editable, control points inside |
+| one fixed color space | six blending spaces to choose from, per grid |
+| settings held inside the tool | settings also in the address: a link shares the grid |
 
 ## Checks carried out
 
@@ -380,4 +377,4 @@ app.js           frame (format, density, resolution), colors, interpolation, can
   point imposes a color the plain gradient did not have. A rupture line would keep the very same gap
   whatever the sampling.
 - Carried out by `.t/ui.mjs` (the interface, 220 checks) and `.t/spaces.cjs` (the color math, 123
-  checks), plus `.t/ref.py` for the parity with the add-on formula.
+  checks), plus `.t/ref.py` for the parity with an independent Python implementation.

@@ -2,7 +2,7 @@
 
 /* ==========================================================================
    storage.js — grid persistence in localStorage
-   Web-page counterpart of the `grids/` folder of the Blender add-on.
+   The saved grids are records kept in the browser: no files to carry around.
    Version 2 keys: the model changed (format + density instead of cols x rows),
    version 1 records are wiped on load.
    ========================================================================== */
@@ -84,7 +84,7 @@ class GridStore {
     }
   }
 
-  /* Names sorted, like the JSON files are sorted in the add-on */
+  /* Names sorted */
   list() {
     return Object.keys(this._readAll()).sort((a, b) =>
       a.localeCompare(b, "en", { numeric: true, sensitivity: "base" }));
