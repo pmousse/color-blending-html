@@ -83,3 +83,12 @@ python .t/ref.py         # parity with an independent Python implementation → 
   sRGB. Grids made elsewhere are not translated, they start fresh.
 - Corner colors and copied codes stay plain sRGB HEX whatever the blending space.
 - Control point rings are drawn on the preview only, never in the exported PNG.
+
+## Credits
+
+**This project's code was written by an AI coding agent.** Qwen 3.8 flash (model build
+`qwen3.8-flash-next`) working in the [pi](https://github.com/badlogic/pi-mono) coding-agent harness,
+at the direction of **pmousse**, who chose the direction, supplied the reference images, judged every
+result and owns the project. Worth stating plainly: some of the reasoning here was the agent's, some
+of it was the human's, and the division is not neat — the 343 checks under `.t/` are what settled the
+arguments.
