@@ -310,6 +310,7 @@ app.js           frame (format, density, resolution), colors, interpolation, can
 README.md        the presentation, the one a reader opens first
 intro.jpg        the image of that presentation
 LICENSE          MIT, © 2026 pmousse
+NOTICE           what the licence covers, and where the code came from
 .t/              test harness (jsdom + Python reference), a development tool only
 ```
 
@@ -394,4 +395,5 @@ plain-image preview, refused the spacing parameter, and decided what was worth k
 carried out above are what settled the arguments between the two.
 
 Everything in this repository — the code, this documentation, the introduction image — is under the
-**MIT licence**, © 2026 pmousse. See `LICENSE`.
+**MIT licence**, © 2026 pmousse. See `LICENSE`; `NOTICE` states the scope of what it covers and keeps
+the account above travelling with any copy.

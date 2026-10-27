@@ -65,6 +65,7 @@ sits in [DETAILS.md](DETAILS.md).
 | `styles.css` | everything |
 | `DETAILS.md` | the long documentation |
 | `LICENSE` | MIT, © 2026 pmousse |
+| `NOTICE` | what the licence covers, and where the code came from |
 | `.t/` | dev tooling: 220 interface checks, 123 color math checks, a Python reference |
 
 Vanilla HTML, CSS and JavaScript. Works straight from the files (`file://`), no server needed.
@@ -97,5 +98,5 @@ arguments.
 ## Licence
 
 Everything here — the code, the documentation, the introduction image — is under the **MIT licence**,
-© 2026 pmousse: use it, change it, sell prints made from it, keep the copyright notice and this
-explanation of where the code came from. See [LICENSE](LICENSE).
+© 2026 pmousse: use it, change it, sell prints made from it, keep the copyright notice. See
+[LICENSE](LICENSE), and [NOTICE](NOTICE) for what it covers and how the work was made.

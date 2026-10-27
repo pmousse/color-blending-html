@@ -1,0 +1,29 @@
+NOTICE — what the licence covers, and where the code came from
+
+Scope of the licence
+  The MIT licence in LICENSE covers the whole of this repository: index.html,
+  app.js, colorspaces.js, storage.js, styles.css, README.md, DETAILS.md, the
+  introduction image intro.jpg, the development tooling under .t/, and this
+  file. Use it, modify it, sell prints made from it; keep the copyright notice
+  and this notice.
+
+Where the code came from
+  The code and the documentation here were produced by an AI coding agent —
+  Qwen 3.8 flash (model build qwen3.8-flash-next) working in the pi coding-agent
+  harness — under the direction of pmousse, who set the direction, supplied the
+  reference images, judged every result and owns the project.
+
+  The division is not neat. The agent proposed the hue unwrapping, the control
+  point lattice, the reverse mapping between a drawn ring and a sampling
+  position, the fixes to the OkLab matrices. The human refused the visible
+  rupture lines, asked for the preview as a plain image, refused a spacing
+  parameter, and decided what was worth keeping. The 343 checks under .t/ are
+  what settled the arguments between the two.
+
+  Keeping this account with a copy is not a legal condition of the MIT licence.
+  It is asked here as a matter of honesty about how the work was made.
+
+No third-party material in this repository
+  No dependency, no library, no font, no image taken from elsewhere. Everything
+  committed here was made for this project, and the grids one paints and the PNG
+  files one exports are entirely the user's own.
