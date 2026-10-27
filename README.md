@@ -39,26 +39,20 @@ A plain web page: no build, no framework, no dependency — open it and paint.
   only if you ask.
 - A file name that says what was painted: `colorgrid_blue-desktop_27x27_d27_1x1_oklch_cp3_3840x3840.png`.
 - **Copy palette** for the distinct codes, `Shift` + click to copy one cell's code.
-- Grids **saved in the browser** (localStorage): name, format, density, resolution, space, points.
+- **Copy link** for an address that carries the settings: send it, the page opens exactly as it was
+  left.
 
-**The address is the work**
+**Saved presets**
 
-Every setting — format, density, resolution, space, name, corner colors, control points, the codes
-shown or painted — lives in the URL fragment. Copy the link, send it, the page opens exactly as it
-was left. `#F=16x9&n=11&sp=oklch&nm=blue-desktop&P=22x30_000000*50x50_ff00ff`
+- A name + **Save** and the grid is kept in the browser storage: format, density, resolution,
+  blending space, corner colors and control points.
+- Saved grids are listed in the panel — click a name to reopen one, `✎` to rename it, `×` to delete
+  it. Each line announces what it holds: `12×7 · 16:9`, `5×5 · OkLab · 1 control point`.
+- No account, no server, nothing uploaded: the grids stay on the machine, in `localStorage`.
+- The page reopens as it was left, showing the grid you were last working on.
 
-## How it works
-
-```
-x = col / (cols - 1)          y = 1 - row / (rows - 1)
-
-c = (1-y) · [(1-x) · BL + x · BR]  +  y · [(1-x) · TL + x · TR]
-```
-
-The plain bilinear pass, checked cell by cell against an independent Python implementation. With
-control points, the frame becomes a lattice and each patch is blended with this same pass — with no
-point at all, the result is exactly the plain grid.
-[Full documentation → DETAILS.md](DETAILS.md)
+The long version — the interpolation, the six spaces, the address keys, the storage, the checks —
+sits in [DETAILS.md](DETAILS.md).
 
 ## Files
 
