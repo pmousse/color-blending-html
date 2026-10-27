@@ -1,0 +1,14 @@
+# dev tooling: installed dependencies and generated artifacts
+.t/node_modules/
+.t/matrix.json
+.t/__pycache__/
+
+# scratch files one produces while looking at the page
+_*.png
+_*.html
+*.log
+
+# editors and systems
+.DS_Store
+Thumbs.db
+desktop.ini

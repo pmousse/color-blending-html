@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Color Grid — palette by interpolation</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <h1>Color Grid</h1>
+  <p class="sub">4 corner colors, one image filled by bilinear interpolation, exportable as PNG.</p>
+</header>
+
+<main class="layout">
+
+  <!-- ===================== CONTROL PANEL ===================== -->
+  <section class="panel" aria-label="Settings">
+
+    <div class="group">
+      <span class="group-title">Image format</span>
+      <select id="format" title="Shape of the image: square, landscape, phone…"></select>
+      <div class="row" id="rowCustom" hidden>
+        <label>Width <input id="fmtW" type="number" min="16" max="8192" step="1" value="16"></label>
+        <label>Height <input id="fmtH" type="number" min="16" max="8192" step="1" value="9"></label>
+      </div>
+      <label>Density <input id="density" type="number" min="1" max="64" step="1" value="5"
+        title="cells along the short side of the image"></label>
+      <p id="frame-info" class="hint"></p>
+    </div>
+
+    <div class="group">
+      <span class="group-title">Blending space</span>
+      <select id="space" title="Space used to compute the intermediate colors"></select>
+      <p id="space-hint" class="hint"></p>
+    </div>
+
+    <div class="group">
+      <span class="group-title">Corner colors</span>
+      <div class="corners">
+        <label class="corner"><input id="c-top-left" type="color" value="#ff0000"><span>Top left</span></label>
+        <label class="corner"><input id="c-top-right" type="color" value="#00ff00"><span>Top right</span></label>
+        <label class="corner"><input id="c-bottom-left" type="color" value="#0000ff"><span>Bottom left</span></label>
+        <label class="corner"><input id="c-bottom-right" type="color" value="#ffff00"><span>Bottom right</span></label>
+      </div>
+    </div>
+
+    <div class="group">
+      <span class="group-title">Control points</span>
+      <label class="check"><input id="pick-mode" type="checkbox" checked
+        title="Shift+click still copies the HEX code of the cell"><span>Click places a control point</span></label>
+      <label class="check"><input id="mark-points" type="checkbox" checked
+        title="Marks are drawn on the preview only, never in the exported PNG — the rings are also the handle one presses to move a point"><span>Mark control points</span></label>
+      <div id="point-list" class="point-list"></div>
+      <p id="point-info" class="hint"></p>
+    </div>
+
+    <div class="group actions">
+      <div class="row">
+        <button id="copy-palette" type="button" title="Copy every HEX code in the grid">Copy palette</button>
+        <button id="regen" type="button" title="Rebuild the grid">Regenerate</button>
+      </div>
+      <label class="check"><input id="show-hex" type="checkbox" checked><span>Show codes</span></label>
+    </div>
+
+    <div class="group">
+      <span class="group-title">My grid</span>
+      <input id="grid-name" type="text" value="My Grid" spellcheck="false" placeholder="Grid name">
+      <button id="save" type="button" title="Save the grid in browser storage">Save</button>
+    </div>
+
+    <div class="group">
+      <span class="group-title">Export PNG</span>
+      <label>Long side <select id="res" title="Resolution of the exported file"></select></label>
+      <label class="check"><input id="export-hex" type="checkbox"><span>HEX codes in the image</span></label>
+      <button id="export" type="button" title="Download the image at the chosen resolution">Export PNG ↓</button>
+      <p id="export-info" class="hint"></p>
+    </div>
+
+    <div class="group">
+      <span class="group-title">Grid address</span>
+      <button id="copy-link" type="button" title="Copy the full address: format, density, resolution, space, colors">
+        Copy link</button>
+      <p id="link-info" class="hint link"></p>
+    </div>
+
+    <div class="group">
+      <span class="group-title">Saved grids</span>
+      <div id="grid-list" class="grid-list"></div>
+      <p id="storage-note" class="note" hidden></p>
+    </div>
+
+  </section>
+
+  <!-- ===================== PREVIEW ===================== -->
+  <section class="stage">
+    <div class="frame" id="frame">
+      <canvas id="grid" role="img" aria-label="Color grid: 4 corner colors, bilinear gradient"></canvas>
+    </div>
+    <div class="status">
+      <span id="summary"></span>
+      <span id="picked" class="picked"></span>
+    </div>
+  </section>
+
+</main>
+
+<div id="toast" class="toast" hidden></div>
+
+<script src="storage.js"></script>
+<script src="colorspaces.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
