@@ -7,10 +7,6 @@ A plain web page: no build, no framework, no dependency — open it and paint.
 
 ### → [Try it online](https://pmousse.github.io/color-blending-html/)
 
-Born from the Blender add-on `color_grid`, with the image frame model of Truchet Studio: a
-**format**, a cell **density**, an export **resolution**. Nothing else — no spacing, no rotate, no
-move, no flip.
-
 ## What it does
 
 **The frame**
