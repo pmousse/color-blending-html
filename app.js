@@ -1193,9 +1193,8 @@ const namesEqual = (a, b) =>
 
 /* ------------------------- settings in the address -------------------------
 
-   The settings are written in the address fragment (#F=16x9&n=13&sp=oklch…) as in
-   the truchet project. The fragment rather than the query (?F=16) for two reasons:
-   it triggers no reload, and it works in file:// — history.replaceState is
+   The settings are written in the address fragment (#F=16x9&n=13&sp=oklch…). The fragment rather
+   than the query (?F=16) for two reasons: it triggers no reload, and it works in file:// — history.replaceState is
    sometimes refused there, the fallback onto location.hash takes over, and the
    replacement avoids piling up one history entry per setting.
 
